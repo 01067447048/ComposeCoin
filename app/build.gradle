@@ -19,12 +19,11 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
+    }
 
-        Properties properties = new Properties()
-        properties.load(project.rootProject.file("local.properties").newDataInputStream())
-
-        buildConfigField "String", "BASE_URL", "\"${properties.getProperty("BASE_URL")}\""
-
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
     }
 
     buildTypes {
@@ -61,6 +60,8 @@ dependencies {
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.3.1'
     implementation 'androidx.activity:activity-compose:1.3.1'
+    implementation project(path: ':domain')
+    implementation project(path: ':data')
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
