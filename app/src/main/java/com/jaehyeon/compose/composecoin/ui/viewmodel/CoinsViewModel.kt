@@ -30,7 +30,7 @@ class CoinsViewModel @Inject constructor(
     var state by mutableStateOf(CoinsState())
         private set
 
-    private fun getCoins() {
+    fun getCoins() {
         useCase().onEach { result ->
             state = when (result) {
                 is Resource.Success -> {
