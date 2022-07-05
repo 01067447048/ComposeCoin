@@ -14,8 +14,9 @@ class CoinDetailRepositoryImpl @Inject constructor(
     private val api: CoinDetailDataSource
 ): CoinDetailRepository {
 
-    // 마찬 가지로 한 번의 이벤트 발생하므로 Single로 이벤트 생성
+    // 마찬 가지로 한 번의 이벤트 발생하므로 Single 로 이벤트 생성
     // CoinResponse to DomainCoinDetail 로 mapping.
+    // DataSource : CoinDetailResponse > Repository : DomainCoinDetail
     override fun getCoinDetail(id: String): Single<DomainCoinDetail> {
         return api.getCoinDetail(id).map {
             it.toDomainCoinDetail()

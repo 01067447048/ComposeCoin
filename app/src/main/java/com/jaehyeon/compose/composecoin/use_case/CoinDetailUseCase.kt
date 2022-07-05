@@ -12,7 +12,10 @@ import javax.inject.Inject
 class CoinDetailUseCase @Inject constructor(
     private val repository: CoinDetailRepository
 ) {
-    
+
+    // 똑같이 Single 이벤트 발생시킴.
+    // 그 후 PresentationCoinDetail 로 mapping
+    // Repository : DomainCoinDetail > ViewModel : PresentationCoinDetail
     fun invoke(id: String): Single<PresentationCoinDetail> {
         return repository.getCoinDetail(id).map {
             it.toPresentationCoinDetail()

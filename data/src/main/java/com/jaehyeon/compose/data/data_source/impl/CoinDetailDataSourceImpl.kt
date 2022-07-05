@@ -14,6 +14,9 @@ class CoinDetailDataSourceImpl @Inject constructor(
     @RxRetrofit
     private val retrofit: Retrofit
 ): CoinDetailDataSource {
+
+    // Single 로 이벤트 발생.
+    // CoinDetailResponse 를 받는 endpoint
     override fun getCoinDetail(id: String): Single<CoinDetailResponse> {
         return retrofit.create(CoinDetailDataSource::class.java).getCoinDetail(id)
     }
