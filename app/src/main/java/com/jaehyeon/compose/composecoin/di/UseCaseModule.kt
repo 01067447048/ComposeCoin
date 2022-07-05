@@ -1,6 +1,8 @@
 package com.jaehyeon.compose.composecoin.di
 
+import com.jaehyeon.compose.composecoin.use_case.CoinDetailUseCase
 import com.jaehyeon.compose.composecoin.use_case.CoinsUseCase
+import com.jaehyeon.compose.domain.repository.CoinDetailRepository
 import com.jaehyeon.compose.domain.repository.CoinListRepository
 import dagger.Module
 import dagger.Provides
@@ -14,10 +16,18 @@ object UseCaseModule {
 
     @Provides
     @Singleton
-    fun provideUseCase(
+    fun provideCoinListUseCase(
         repository: CoinListRepository
     ): CoinsUseCase {
         return CoinsUseCase(repository)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCoinDetailUseCase(
+        repository: CoinDetailRepository
+    ): CoinDetailUseCase {
+        return CoinDetailUseCase(repository)
     }
 
 }

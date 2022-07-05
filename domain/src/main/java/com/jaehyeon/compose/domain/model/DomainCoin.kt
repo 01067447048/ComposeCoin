@@ -8,5 +8,6 @@ data class DomainCoin(
     val name: String,
     val rank: Int,
     val symbol: String,
+    val id: String
 )
 

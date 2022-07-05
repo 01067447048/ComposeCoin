@@ -1,5 +1,6 @@
-package com.jaehyeon.compose.composecoin.ui.components
+package com.jaehyeon.compose.composecoin.ui.components.coin_list
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -20,12 +21,14 @@ import androidx.compose.ui.text.style.TextOverflow
 @Composable
 fun CoinListItem(
     coin: PresentationCoin,
+    onClick: (PresentationCoin) -> Unit
 ) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
+            .clickable { onClick(coin) }
             .padding(20.dp),
-        horizontalArrangement = Arrangement.SpaceBetween
+        horizontalArrangement = Arrangement.SpaceBetween,
     ) {
         Text(
             text = if (coin.isNew) "${coin.rank}. ${coin.symbol} (${coin.symbol}) (new!)" else "${coin.rank}. ${coin.symbol} (${coin.symbol})",

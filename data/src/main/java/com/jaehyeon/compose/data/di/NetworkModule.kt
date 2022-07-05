@@ -5,12 +5,16 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import io.reactivex.rxjava3.internal.schedulers.RxThreadFactory
+import io.reactivex.rxjava3.schedulers.Schedulers
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 import java.util.concurrent.TimeUnit
+import javax.inject.Qualifier
 import javax.inject.Singleton
 
 @Module
@@ -18,13 +22,30 @@ import javax.inject.Singleton
 object NetworkModule {
 
     @Provides
-    @Singleton
+    @CoroutineRetrofit
     fun provideRetrofit(): Retrofit {
         return Retrofit.Builder()
             .baseUrl(BuildConfig.BASE_URL)
             .client(provideOkHttpClient())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+    }
+
+    @Provides
+    @RxRetrofit
+    fun provideRxRetrofit(): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(BuildConfig.BASE_URL)
+            .client(provideOkHttpClient())
+            .addCallAdapterFactory(provideRxAdapter())
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideRxAdapter(): RxJava3CallAdapterFactory {
+        return RxJava3CallAdapterFactory.createWithScheduler(Schedulers.io())
     }
 
     @Provides
@@ -49,3 +70,11 @@ object NetworkModule {
         }
     }
 }
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class CoroutineRetrofit
+
+@Qualifier
+@Retention(AnnotationRetention.BINARY)
+annotation class RxRetrofit

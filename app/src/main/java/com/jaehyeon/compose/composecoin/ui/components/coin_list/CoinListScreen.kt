@@ -1,4 +1,4 @@
-package com.jaehyeon.compose.composecoin.ui.components
+package com.jaehyeon.compose.composecoin.ui.components.coin_list
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,10 +15,13 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.navigation.NavController
+import com.jaehyeon.compose.composecoin.ui.screen.Screen
 import com.jaehyeon.compose.composecoin.ui.viewmodel.CoinsViewModel
 
 @Composable
 fun CoinListScreen(
+    navController: NavController,
     viewModel: CoinsViewModel = hiltViewModel()
 ) {
     val state = viewModel.state
@@ -26,7 +29,10 @@ fun CoinListScreen(
         LazyColumn(modifier = Modifier.fillMaxSize()) {
             items(state.coins) { coin ->
                 CoinListItem(
-                    coin = coin
+                    coin = coin,
+                    onClick = {
+                        navController.navigate(Screen.CoinDetailScreen.route + "/${coin.id}")
+                    }
                 )
             }
         }

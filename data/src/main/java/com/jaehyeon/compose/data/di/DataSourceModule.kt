@@ -1,6 +1,8 @@
 package com.jaehyeon.compose.data.di
 
+import com.jaehyeon.compose.data.data_source.CoinDetailDataSource
 import com.jaehyeon.compose.data.data_source.CoinListDataSource
+import com.jaehyeon.compose.data.data_source.impl.CoinDetailDataSourceImpl
 import com.jaehyeon.compose.data.data_source.impl.CoinListDataSourceImpl
 import dagger.Module
 import dagger.Provides
@@ -15,10 +17,20 @@ object DataSourceModule {
 
     @Provides
     @Singleton
-    fun provideConListDataSource(
+    fun provideCoinListDataSource(
+        @CoroutineRetrofit
         retrofit: Retrofit
     ): CoinListDataSource {
         return CoinListDataSourceImpl(retrofit)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCoinDetailDataSource(
+        @RxRetrofit
+        retrofit: Retrofit
+    ): CoinDetailDataSource {
+        return CoinDetailDataSourceImpl(retrofit)
     }
 
 }

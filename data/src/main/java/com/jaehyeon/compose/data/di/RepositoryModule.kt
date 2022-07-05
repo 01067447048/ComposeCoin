@@ -1,7 +1,10 @@
 package com.jaehyeon.compose.data.di
 
+import com.jaehyeon.compose.data.CoinDetailRepositoryImpl
 import com.jaehyeon.compose.data.CoinListRepositoryImpl
+import com.jaehyeon.compose.data.data_source.CoinDetailDataSource
 import com.jaehyeon.compose.data.data_source.CoinListDataSource
+import com.jaehyeon.compose.domain.repository.CoinDetailRepository
 import com.jaehyeon.compose.domain.repository.CoinListRepository
 import dagger.Module
 import dagger.Provides
@@ -19,5 +22,13 @@ object RepositoryModule {
         coinListDataSource: CoinListDataSource
     ): CoinListRepository {
         return CoinListRepositoryImpl(coinListDataSource)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCoinDetailRepository(
+        coinDetailDataSource: CoinDetailDataSource
+    ): CoinDetailRepository {
+        return CoinDetailRepositoryImpl(coinDetailDataSource)
     }
 }

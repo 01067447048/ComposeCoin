@@ -16,5 +16,5 @@ data class CoinListResponse(
 )
 
 fun CoinListResponse.toDomainCoin(): DomainCoin = DomainCoin(
-    isActive, isNew, name, rank, symbol
+    isActive, isNew, name, rank, symbol, id
 )

@@ -1,6 +1,7 @@
 package com.jaehyeon.compose.data.data_source.impl
 
 import com.jaehyeon.compose.data.data_source.CoinListDataSource
+import com.jaehyeon.compose.data.di.CoroutineRetrofit
 import com.jaehyeon.compose.data.model.CoinListResponse
 import retrofit2.Retrofit
 import javax.inject.Inject
@@ -9,6 +10,7 @@ import javax.inject.Inject
  * Created by Jaehyeon on 2022/06/29.
  */
 class CoinListDataSourceImpl @Inject constructor(
+    @CoroutineRetrofit
     private val retrofit: Retrofit
 ): CoinListDataSource {
 

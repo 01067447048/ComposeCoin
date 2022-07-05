@@ -8,6 +8,7 @@ data class PresentationCoin(
     val name: String,
     val rank: Int,
     val symbol: String,
+    val id: String
 )
 
 fun DomainCoin.toPresentationCoin(): PresentationCoin =
@@ -16,5 +17,6 @@ fun DomainCoin.toPresentationCoin(): PresentationCoin =
         isNew = isNew,
         name = name,
         rank = rank,
-        symbol = symbol
+        symbol = symbol,
+        id = id
     )
